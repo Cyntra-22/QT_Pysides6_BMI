@@ -1,4 +1,4 @@
-import sys
+'''import sys
 from PySide6.QtWidgets import *
 from PySide6.QtCore import *
 import math
@@ -67,4 +67,59 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
 
     w = Greeting_window()
-    sys.exit(app.exec())
+    sys.exit(app.exec())'''
+
+
+
+import sys
+from PySide6.QtWidgets import QApplication, QMainWindow, QLabel, QPushButton, QVBoxLayout, QWidget
+
+class CurrencyConverter(QMainWindow):
+    def __init__(self):
+        super().__init__()
+
+        self.setWindowTitle("Currency Converter")
+        self.setGeometry(100, 100, 400, 200)
+
+        # Labels to display selected currencies
+        self.from_currency_label = QLabel("From: ")
+        self.to_currency_label = QLabel("To: ")
+        
+        # Buttons to select currencies
+        self.from_currency_button = QPushButton("Select From Currency")
+        self.to_currency_button = QPushButton("Select To Currency")
+        
+        # Connecting button clicks to functions
+        self.from_currency_button.clicked.connect(self.select_from_currency)
+        self.to_currency_button.clicked.connect(self.select_to_currency)
+
+        # Layout
+        layout = QVBoxLayout()
+        layout.addWidget(self.from_currency_label)
+        layout.addWidget(self.from_currency_button)
+        layout.addWidget(self.to_currency_label)
+        layout.addWidget(self.to_currency_button)
+
+        widget = QWidget()
+        widget.setLayout(layout)
+        self.setCentralWidget(widget)
+
+    def select_from_currency(self):
+        # Implement logic for selecting 'from' currency
+        selected_currency = "USD"  # Replace with your logic to select currency
+        self.from_currency_label.setText(f"From: {selected_currency}")
+
+    def select_to_currency(self):
+        # Implement logic for selecting 'to' currency
+        selected_currency = "EUR"  # Replace with your logic to select currency
+        self.to_currency_label.setText(f"To: {selected_currency}")
+
+
+def main():
+    app = QApplication(sys.argv)
+    converter = CurrencyConverter()
+    converter.show()
+    sys.exit(app.exec_())
+
+if __name__ == "__main__":
+    main()
